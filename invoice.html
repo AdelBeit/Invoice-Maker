@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Invoice</title>
+    <link href="main.css?ver=1" rel="stylesheet" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="invoice" class="invoice container">
+        <form id="pdf_form" action="/pdfs" accept-charset="UTF-8" method="post" target="_blank">
+
+            <div class="group invoice_head">
+                <!--
+                <textarea class="textarea" name="company_name" id="company_name" tabindex="5">Ideal Auto Sales and Repairs LLC</textarea>
+                <textarea class="textarea" name="your_address" id="your_address" tabindex="6">Kasem
+5645 west state road 46
+Bloomington, IN
+47404</textarea>
+-->
+                <textarea class="textarea" name="company_name" id="company_name" tabindex="5"></textarea>
+                <textarea class="textarea" name="your_address" id="your_address" tabindex="6"></textarea>
+            </div>
+            <div class="group invoice_details">
+                <input class="" type="text" name="invoice_number" title="Invoice Number" value="" maxlength="255" placeholder="Invoice Name" tabindex="7" id="invoice_number" />
+                <input class="" type="text" name="issued_date" title="Issued Date" value="" maxlength="255" placeholder="Issued date" tabindex="8" />
+                <textarea class="textarea" name="client_info" title="Client Info" value="" maxlength="255" placeholder="Client Info" tabindex="9" id="client_info"></textarea>
+            </div>
+            <div class="group invoice_body">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Item</th>
+                            <th>Description</th>
+                            <th>Quanty</th>
+                            <th>Unit Price</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <button type="button" class="button remove"></button>
+                            </td>
+                            <td>
+                                <input type="text" name="item"/>`
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+
+            <div class="items" id="items">
+                <div>
+                    <div class="item" id="item_10">
+                        <div class="remove_action action hover">
+                            <button type="button" class="button remove_item_btn">Delete Item</button>
+                        </div>
+                        <div class="attributes cf">
+                            <input class="editable quantity hover" type="number" name="items_attributes[10][quantity]" title="Unit" value="1" tabindex="51" />
+                            <input class="editable unit hover" type="text" name="items_attributes[10][unit]" title="Unit" value="Hours" maxlength="100" tabindex="52" />
+                            <textarea class="editable ta description hover" name="items_attributes[10][description]" rows="1" tabindex="53" maxlength="255" style="overflow: hidden; word-wrap: break-word; resize: none; height: 35px;">This is a
+        description for
+an invoice
+item</textarea>
+                            <input class="editable unitprice hover" type="number" name="items_attributes[10][unit_price]" title="Unit Price" value="10" maxlength="255" tabindex="54" />
+                            <p class="label vatattribute calculated tax taxes hover" style="visibility: visible;">0.70</p>
+                            <input class="tax" type="hidden" name="items_attributes[10][tax]" value="0.70" />
+                            <p class="label subtotalattribute calculated subtotal hover">10.70</p>
+                            <input class="subtotal" type="hidden" name="items_attributes[10][subtotal]" value="10.70" /></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="item" id="item_12">
+                        <div class="remove_action action hover">
+                            <button type="button" class="button remove_item_btn">Delete Item</button>
+                        </div>
+                        <div class="attributes cf">
+                            <input class="editable quantity hover" type="number" name="items_attributes[12][quantity]" title="Unit" value="1" tabindex="59" />
+                            <input class="editable unit hover" type="text" name="items_attributes[12][unit]" title="Unit" value="Hours" maxlength="100" tabindex="60" />
+                            <textarea class="editable ta description hover" name="items_attributes[12][description]" rows="1" tabindex="61" maxlength="255" style="overflow: hidden; word-wrap: break-word; resize: none; height: 35px;">This is a
+        description for
+an invoice
+item</textarea>
+                            <input class="editable unitprice hover" type="number" name="items_attributes[12][unit_price]" title="Unit Price" value="10" maxlength="255" tabindex="62" />
+                            <p class="label vatattribute calculated tax taxes hover" style="visibility: visible;">0.70</p>
+                            <input class="tax" type="hidden" name="items_attributes[12][tax]" value="0.70" />
+                            <p class="label subtotalattribute calculated subtotal hover">10.70</p>
+                            <input class="subtotal" type="hidden" name="items_attributes[12][subtotal]" value="10.70" /></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="item" id="item_14">
+                        <div class="remove_action action hover">
+                            <button type="button" class="button remove_item_btn">Delete Item</button>
+                        </div>
+                        <div class="attributes cf">
+                            <input class="editable quantity hover" type="number" name="items_attributes[14][quantity]" title="Unit" value="1" tabindex="67" />
+                            <input class="editable unit hover" type="text" name="items_attributes[14][unit]" title="Unit" value="Hours" maxlength="100" tabindex="68" />
+                            <textarea class="editable ta description hover" name="items_attributes[14][description]" rows="1" tabindex="69" maxlength="255" style="overflow: hidden; word-wrap: break-word; resize: none; height: 35px;">This is a
+        description for
+an invoice
+item</textarea>
+                            <input class="editable unitprice hover" type="number" name="items_attributes[14][unit_price]" title="Unit Price" value="10" maxlength="255" tabindex="70" />
+                            <p class="label vatattribute calculated tax taxes hover" style="visibility: visible;">0.70</p>
+                            <input class="tax" type="hidden" name="items_attributes[14][tax]" value="0.70" />
+                            <p class="label subtotalattribute calculated subtotal hover">10.70</p>
+                            <input class="subtotal" type="hidden" name="items_attributes[14][subtotal]" value="10.70" /></div>
+                    </div>
+                </div>
+                <div class="add_action action hover">
+                    <button type="button" class="button add_item_btn">Add Item</button>
+                </div>
+            </div>
+
+    </div>
+    <div class="group">
+        <div class="widget totals cf">
+            <div class="vattotal taxes hover" style="visibility: visible;">
+                <h3 class="title">
+                    <span class="calculated tax_name">TAX</span>:
+                    <span class="calculated tax_total">$2.10</span></h3>
+            </div>
+            <div class="maintotal">
+                <h2 class="title">
+                    <span class="currency hover">USD</span>Total:
+                    <span class="calculated total">$32.10</span></h2>
+            </div>
+        </div>
+    </div>
+    <div class="group commentsgroup">
+        <div class="widget other_information cf">
+            <div class="tool_tip top_right hover">
+                <a title="Use this space to add any extra comments - optional">
+                    <span class="hide">help</span>
+                </a>
+            </div>
+            <textarea class="editable ta hover" name="comments" id="comments" tabindex="100" style="overflow: hidden; word-wrap: break-word; resize: none; height: 60px;"></textarea>
+        </div>
+        <div class="widget payment_details cf right_align">
+            <div class="tool_tip top_left hover">
+                <a title="Your payment details - so the client knows how to pay you">
+                    <span class="hide">help</span>
+                </a>
+            </div>
+            <textarea class="editable ta hover" name="payment_details" id="payment_details" tabindex="101" style="overflow: hidden; word-wrap: break-word; resize: none; height: 102px;"></textarea>
+        </div>
+    </div>
+    <div class="group"></div>
+    <input type="hidden" name="utf8" value="✓" />
+    <input type="hidden" name="currency" value="USD" />
+    <input type="hidden" name="include_tax" value="true" />
+    <input type="hidden" name="tax_ratio" value="7" />
+    <input type="hidden" name="tax_name" value="TAX" />
+    <input type="hidden" name="tax_total" value="$2.10" />
+    <input type="hidden" name="total" value="$32.10" />
+    <input type="hidden" name="authenticity_token" /></form>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!--    <script src="application.js"></script>-->
+</body>
+
+</html>
