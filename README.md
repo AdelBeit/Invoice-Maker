@@ -3,9 +3,5 @@
 # Invoice-Maker
 ### Automated Invoicing Solution
 
-#### Inspired by [Invoice-O-Matic](http://www.invoiceomatic.io), this is an invoicing tool that simplifies invoice making/archiving easier. I made it for a friend's auto dealership business.
-
-Invoice-O-Matic is a demoware, by FreeAgent, for people to try before buying a whole suite of tools for business management. As with any demoware, there are limitations to what you can do with Invoice-O-Matic, so my friend asked me to make an invoicing tool similar to it but with more freedom.
-
-He liked the idea of Invoice-O-Matic but wanted something with more automation. For example Invoice-O-Matic didn't store the files in a database for later use, it was the user's responsibility to name and store the invoice files, which meant they had to keep track of names they had used to be able to maintain a clean and tidy archive so that they can find any invoices later when they needed them. But as a business owner, he didn't have the time to maintain a database manually.
- Invoice-O-Matic also didn't keep track of your email and/or allow you to set default values for some fields such as the company information and sender email, so he had to do that every time he made an invoice and it's just really tedious. 
+A friend of mine who runs an autodealership business needed an invoicing tool that would help him make and archive invoices in an easier fashion, there are many paid and free invoicing solutions out there but he couldn't find that did everything he needed. 
+So I made him the Invoice Maker. It's a simple invoice form webpage made with HTML-CSS and JS, using PHP and SQL, the Invoice Maker turns the completed invoice into a pdf then proceeds to save it on a database where it's properly named for easy retrieval when you need it, and a copy of it is sent to the approperiate customer. The invoice form is designed to meet his needs specifically (auto-dealership), as you can see there are no fields to set company information for the header of the form, that's because it's hard coded in the php, I wanted to leave as little fields on the page as possible so that he could get invoices faster, however I may change my mind and add the extra fields later, so that people can use it as a more general purpose invoicing tool.
