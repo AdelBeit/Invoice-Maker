@@ -14,19 +14,27 @@
             background-color: #e9e9e9;
         }
         
-        ::-webkit-scrollbar{
-            display:none;
+         ::-webkit-scrollbar {
+            display: none;
         }
         
         .invoice {
             background-color: white;
             box-shadow: 0 0 1px black;
+            padding:20px;
         }
         
-        input, textarea {
+        input,
+        textarea {
             border-style: dashed;
             border-width: 1px;
             border-color: darkgray;
+            vertical-align: top;
+            resize: none;
+        }
+        
+        textarea {
+            height: 60px;
         }
         
         input:focus {
@@ -61,7 +69,7 @@
             width: 50px;
         }
         
-        .col.subtotal>input {
+        .col.parts>input {
             width: 50px;
         }
         
@@ -102,7 +110,6 @@
         .button.add:active {
             background-position: -62px -60px;
         }
-
     </style>
 </head>
 
@@ -114,29 +121,29 @@
         <form id="pdf_form" action="/pdfs" accept-charset="UTF-8" method="post" target="_blank">
 
             <div class="group invoice_head">
+                <div class="group info">
+                    <input class="number" name="invoiceName" type="text" placeholder="0000A"/>
+                    <input class="date" name="invoiceDate" type="date" />
+                </div>
+                <hr>
                 <div class="group business info">
-                    <textarea class="business name" name="businessName" placeholder="Ideal Auto Sales and Repairs LLC" tabindex = "0"></textarea>
-                    <textarea class="business address" name="businessInformation" placeholder="5645 west state road 46&#13;&#10;Bloomington, IN 47404" tabindex = "1"></textarea>
-                    <input class="date" name="date" placeholder="m/d/y"/>
+                    <textarea class="business name" name="businessName" placeholder="Ideal Auto Sales and Repairs LLC" tabindex="0"></textarea>
+                    <textarea class="business address" name="businessInformation" placeholder="5645 west state road 46&#13;&#10;Bloomington, IN 47404" tabindex="1"></textarea>
+                    <input type="text" class="business number" name="businessNumber" size="12" placeholder="phone #"/>
                 </div>
                 <hr>
                 <div class="group customer info">
-                    <textarea class="customer name" name="customerName" tabindex="5"></textarea>
-                    <textarea class="customer address" name="customerAddress" placeHolder="street, city, state, zip" tabindex="6"></textarea>
-                </div>
-                
-                
+                    <textarea class="customer name" name="customerName" placeholder="client info" tabindex="5"></textarea>
+                    <textarea class="customer address" name="customerAddress" placeholder="street, city, state, zip" tabindex="6"></textarea>
+                    <input type="text" class="vehicle name" name="vehicleInfo" size="60" placeholder="2017 HONDA TRUCK CR-V"/>
+                    <input type="text" class="vehicle milage" name="vehicleMilage" size="6" placeholder="176,154"/>
+                    <input type="text" class="vehicle tag" name="vehicleTag" size="6" placeholder="RE8832"/>
+                    <input type="text" class="vehicle state" name="vehicleState" size="10" placeholder="IN or Indiana"/>
+                </div>                
             </div>
             
-            <div class="group invoice_details">
-
-                <input class="" type="text" name="invoice_number" title="Invoice Number" value="" maxlength="255" placeholder="Invoice Name" tabindex="7" id="invoice_number" />
-
-                <input class="" type="text" name="issued_date" title="Issued Date" value="" maxlength="255" placeholder="Issued date" tabindex="8" />
-
-                <textarea class="textarea" name="client_info" title="Client Info" value="" maxlength="255" placeholder="Client Info" tabindex="9" id="client_info"></textarea>
-            </div>
-            <br>
+            <hr>
+            
             <div class="group invoice_body">
 
                 <table class="parts table">
@@ -149,7 +156,7 @@
                             <th class="col description">Description</th>
                             <th class="col quantity">Quanty</th>
                             <th class="col price">Unit Price</th>
-                            <th class="col subtotal">Subtotal</th>
+                            <th class="col parts">Parts Subtotal</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -173,11 +180,8 @@
                             <th class="col button">
                                 <button type="button" class="button add"></button>
                             </th>
-                            <th class="col item">Item</th>
                             <th class="col description">Description</th>
-                            <th class="col quantity">Quanty</th>
-                            <th class="col price">Unit Price</th>
-                            <th class="col subtotal">Subtotal</th>
+                            <th class="col labor">Labor Subtotal</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -185,23 +189,20 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Parts Total: </td>
-                            <td class="parts total"></td>
+                            <td>Labor Total: </td>
+                            <td class="Labor total"></td>
                             <td></td>
                         </tr>
                     </tfoot>
                 </table>
             </div>
             <div class="group invoice_footer">
-                <h4>Tax (7%): <span class='tax'></span></h3>
-                <h4>Subtotal: <span class='subtotal'></span></h3>
-                <h4>Labor: <input class='labor' /></h3>
+                <h4>Tax (7%): <span class='tax'></span></h4>
+                <h4>Subtotal: <span class='subtotal'></span></h4>
+                <h4>Labor: <input class='labor' /></h4>
                 <h3>Total: <span class='total'></span></h3>
             </div>
-            </form>
+        </form>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -218,46 +219,46 @@
             var descript = tdTag("col description") + '<input type="text" name="description" value="description" />' + closeTd;
             var quantity = tdTag("col quantity") + '<input type="number" min="0" name="quantity" value="1"/>' + closeTd;
             var price = tdTag("col price") + '$<input type="number" min="0" name="price" value="1.00"/>' + closeTd;
-            var subtotal = tdTag("col subtotal") + '$<span class="subtotal">1.00</span>' + closeTd;
+            var subtotal = tdTag("col parts") + '$<span class="subtotal">1.00</span>' + closeTd;
             var row = '<tr>' + button + item + descript + quantity + price + subtotal + '</tr>';
             $(".table").prepend(row);
         }
         // remove relevant row
         function removeRow() {
-            
+
             if ($('.table tbody tr').length > 1) {
                 $(this).parents('tr').first().remove();
                 changeSubtotal(true);
             }
         }
-        
+
         // adjust subtotal textboxes
-        function changeSubtotal(x){
+        function changeSubtotal(x) {
             // only change main subtotal if row is to be removed
-            if(x){
+            if (x) {
                 // change main subtotal and break
                 return;
             }
             // else change approperiate subtotal
             var p = $(this).parent()[0];
-            if(p.className.includes("price")){
-//                p.siblings
-            } else{
+            if (p.className.includes("price")) {
+                //                p.siblings
+            } else {
                 pass;
             }
         }
-        
+
         // adjust subtotal of each part based on quantity
-//        function quantityChange(input){
-//            
-//        }
-        
+        //        function quantityChange(input){
+        //            
+        //        }
+
         // bind click handlers 
         function ready() {
             $('.table').on("click", ".button.remove", removeRow);
             $('.button.add').on("click", appendRow);
             $('.table').on('click change input propertychange paste', ".price > input", changeSubtotal);
-//            $('.quantity').on('input propertychange paste', changeSubtotal("quantity"));
+            //            $('.quantity').on('input propertychange paste', changeSubtotal("quantity"));
         }
         // do when document loads
         $(document).ready(ready());
