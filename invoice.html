@@ -14,14 +14,35 @@
             background-color: #e9e9e9;
         }
         
+        .inline {
+            display: inline;
+        }
+        
+        .center{
+            margin-left:auto;
+            margin-right:auto;
+        }
+        
+        .inlineBlock {
+            display: inline-block;
+        }
+        
+        .clear {
+            clear: both;
+        }
+        
+        .block {
+            display: block;
+        }
+        
          ::-webkit-scrollbar {
             display: none;
         }
         
-        .invoice {
+        #invoice {
             background-color: white;
             box-shadow: 0 0 1px black;
-            padding:20px;
+            padding: 20px;
         }
         
         input,
@@ -110,6 +131,9 @@
         .button.add:active {
             background-position: -62px -60px;
         }
+        
+        .table.labor .description {}
+
     </style>
 </head>
 
@@ -120,35 +144,39 @@
     <div id="invoice" class="invoice container">
         <form id="pdf_form" action="/pdfs" accept-charset="UTF-8" method="post" target="_blank">
 
-            <div class="group invoice_head">
-                <div class="group info">
-                    <input class="number" name="invoiceName" type="text" placeholder="0000A"/>
-                    <input class="date" name="invoiceDate" type="date" />
+            <div id="invoiceHead">
+                <div class="business info">
+                    <div class="inlineBlock pull-left">
+                        <input type="text" class="business number block" name="businessNumber" size="12" placeholder="Phone #" />
+                        <input type="text" class="business email block" name="businessNumber" size="12" placeholder="Email" />
+                    </div>
+                    <div class="inlineBlock">
+                        <textarea class="business name center block" name="businessName" placeholder="Ideal Auto Sales and Repairs LLC" tabindex="0"></textarea>
+                        <textarea class="business address center block" name="businessInformation" placeholder="5645 west state road 46&#13;&#10;Bloomington, IN 47404" tabindex="1"></textarea>
+                    </div>
+                    <div class="inlineBlock pull-right">
+                        <input class="invoiceNumber block" name="invoiceName" type="text" placeholder="0000A" />
+                        <input class="invoiceDate block" name="invoiceDate" type="date" />
+                    </div>
                 </div>
                 <hr>
-                <div class="group business info">
-                    <textarea class="business name" name="businessName" placeholder="Ideal Auto Sales and Repairs LLC" tabindex="0"></textarea>
-                    <textarea class="business address" name="businessInformation" placeholder="5645 west state road 46&#13;&#10;Bloomington, IN 47404" tabindex="1"></textarea>
-                    <input type="text" class="business number" name="businessNumber" size="12" placeholder="phone #"/>
-                </div>
-                <hr>
-                <div class="group customer info">
+                <div class="customer info">
                     <textarea class="customer name" name="customerName" placeholder="client info" tabindex="5"></textarea>
                     <textarea class="customer address" name="customerAddress" placeholder="street, city, state, zip" tabindex="6"></textarea>
-                    <input type="text" class="vehicle name" name="vehicleInfo" size="60" placeholder="2017 HONDA TRUCK CR-V"/>
-                    <input type="text" class="vehicle milage" name="vehicleMilage" size="6" placeholder="176,154"/>
-                    <input type="text" class="vehicle tag" name="vehicleTag" size="6" placeholder="RE8832"/>
-                    <input type="text" class="vehicle state" name="vehicleState" size="10" placeholder="IN or Indiana"/>
-                </div>                
+                    <input type="text" class="vehicle name" name="vehicleInfo" size="60" placeholder="2017 HONDA TRUCK CR-V" />
+                    <input type="text" class="vehicle milage" name="vehicleMilage" size="6" placeholder="176,154" />
+                    <input type="text" class="vehicle tag" name="vehicleTag" size="6" placeholder="RE8832" />
+                    <input type="text" class="vehicle state" name="vehicleState" size="10" placeholder="IN or Indiana" />
+                </div>
             </div>
-            
+
             <hr>
-            
-            <div class="group invoice_body">
+
+            <div id="invoiceBody">
 
                 <table class="parts table">
                     <thead>
-                        <tr class="group">
+                        <tr>
                             <th class="col button">
                                 <button type="button" class="button add"></button>
                             </th>
@@ -176,12 +204,12 @@
 
                 <table class="labor table">
                     <thead>
-                        <tr class="group">
+                        <tr>
                             <th class="col button">
                                 <button type="button" class="button add"></button>
                             </th>
                             <th class="col description">Description</th>
-                            <th class="col labor">Labor Subtotal</th>
+                            <th class="col laborSubtotal">Labor Subtotal</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -189,14 +217,14 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td>Labor Total: </td>
-                            <td class="Labor total"></td>
                             <td></td>
+                            <td>Labor Total: </td>
+                            <td class="labor total"></td>
                         </tr>
                     </tfoot>
                 </table>
             </div>
-            <div class="group invoice_footer">
+            <div id="invoiceFooter">
                 <h4>Tax (7%): <span class='tax'></span></h4>
                 <h4>Subtotal: <span class='subtotal'></span></h4>
                 <h4>Labor: <input class='labor' /></h4>
@@ -221,7 +249,7 @@
             var price = tdTag("col price") + '$<input type="number" min="0" name="price" value="1.00"/>' + closeTd;
             var subtotal = tdTag("col parts") + '$<span class="subtotal">1.00</span>' + closeTd;
             var row = '<tr>' + button + item + descript + quantity + price + subtotal + '</tr>';
-            $(".table").prepend(row);
+            $(".table.parts").prepend(row);
         }
         // remove relevant row
         function removeRow() {
